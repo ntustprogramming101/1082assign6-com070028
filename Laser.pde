@@ -7,9 +7,14 @@ class Laser {
 	static final float maxLength = 20f;
 	float speed = 4f;
 
+
+  Laser(){
+    isAlive = false;
+  }
+
 	void update(){
 
-		if(!isAlive) return;
+		if(isAlive==false) return;
 
 		x += cos(angle) * speed;
 		y += sin(angle) * speed;
@@ -17,7 +22,7 @@ class Laser {
 
 	void display(){
 
-		if(!isAlive) return;
+		if(isAlive==false) return;
 
 		strokeWeight(10);
 		stroke(255, 0, 0);
@@ -29,13 +34,13 @@ class Laser {
 	}
 
 	void checkCollision(Player player){
-		if(!isAlive) return;
+		if(isAlive==false) return;
 
 		if(isHit(x, y, 0, 0, player.x, player.y, player.w, player.h)){
 			player.hurt();
 			isAlive = false;
 		}
-	}
+	} 
 
 	void fire(float originX, float originY, float targetX, float targetY){
 		this.x = this.originX = originX;
@@ -44,7 +49,5 @@ class Laser {
 		isAlive = true;
 	}
 
-	Laser(){
-		isAlive = false;
-	}
+
 }
